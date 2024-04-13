@@ -15,7 +15,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class WebSocketHandler extends TextWebSocketHandler {
 
     //세션에 담아두기 위한 clients 변수 생성
-    private static final ConcurrentHashMap<String, WebSocketSession> clients = new ConcurrentHashMap<String, WebSocketSession>();
+    private static final ConcurrentHashMap<String, WebSocketSession> clients = new ConcurrentHashMap<>();
 
     //웹소켓 서버 접속시 동작
     @Override
