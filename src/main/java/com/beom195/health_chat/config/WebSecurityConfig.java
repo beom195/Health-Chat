@@ -17,7 +17,7 @@ public class WebSecurityConfig {
 
     //비밀번호 암호화 하기 위해 BCryptPasswordEncoder bean 등록
     @Bean
-    PasswordEncoder passwordEncoder() {
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -25,11 +25,11 @@ public class WebSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((authorizeRequests) -> authorizeRequests
-                        .requestMatchers("/", "/member/login", "/css/**", "/js/**").permitAll()
+                        .requestMatchers("/**", "/member/joinPage", "/css/**", "/js/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin((formLogin) -> formLogin
-                        .loginPage("/member/login")
+                        .loginPage("/member/loginPage")
                         .defaultSuccessUrl("/")
                         .failureUrl("/member/fail")
                         .usernameParameter("memberLoginId")

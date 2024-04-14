@@ -4,12 +4,13 @@ import com.beom195.health_chat.domain.Member;
 import com.beom195.health_chat.domain.Role;
 import lombok.*;
 
-
+@Getter
 public class MemberDTO {
 
+    @AllArgsConstructor
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
     @Getter
-    @ToString
+    @Builder
     public static class Request {
 
         private Long memberId;
@@ -27,13 +28,15 @@ public class MemberDTO {
                     .memberPassword(memberPassword)
                     .memberName(memberName)
                     .memberEmail(memberEmail)
-                    .role(role.MEMBER)
+                    .role(Role.MEMBER)
                     .build();
         }
     }
 
+    @AllArgsConstructor
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
     @Getter
+    @Builder
     public static class Response{
 
         private Long memberId;
@@ -44,7 +47,6 @@ public class MemberDTO {
         private Role role;
 
         // Entity -> DTO
-        @Builder
         public Response(Member member){
             this.memberId = member.getMemberId();
             this.memberLoginId = member.getMemberLoginId();
