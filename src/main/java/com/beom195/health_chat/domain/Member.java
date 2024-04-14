@@ -14,18 +14,31 @@ public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")
-    private Long userId;
+    private Long memberId;
 
     @Column(name = "member_login_id")
-    private String userLoginId;
+    private String memberLoginId;
 
     @Column(name = "member_password")
-    private String userPassword;
+    private String memberPassword;
 
     @Column(name = "member_name")
-    private String userName;
+    private String memberName;
 
     @Column(name = "member_email")
-    private String userEmail;
+    private String memberEmail;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role;
+
+    @Builder
+    public Member(Long memberId, String memberLoginId, String memberPassword, String memberName, String memberEmail, Role role) {
+        this.memberId = memberId;
+        this.memberLoginId = memberLoginId;
+        this.memberPassword = memberPassword;
+        this.memberName = memberName;
+        this.memberEmail = memberEmail;
+        this.role = role;
+    }
 }

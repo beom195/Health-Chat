@@ -1,25 +1,57 @@
 package com.beom195.health_chat.dto;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import com.beom195.health_chat.domain.Member;
+import com.beom195.health_chat.domain.Role;
+import lombok.*;
 
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Getter
-@ToString
+
 public class MemberDTO {
 
-    private Long userId;
+    @NoArgsConstructor(access = AccessLevel.PROTECTED)
+    @Getter
+    @ToString
+    public static class Request {
 
-    private String userLoginId;
+        private Long memberId;
+        private String memberLoginId;
+        private String memberPassword;
+        private String memberName;
+        private String memberEmail;
+        private Role role;
 
-    private String userPassword;
+        // DTO -> Entity
+        public Member toEntity(){
+            return Member.builder()
+                    .memberId(memberId)
+                    .memberLoginId(memberLoginId)
+                    .memberPassword(memberPassword)
+                    .memberName(memberName)
+                    .memberEmail(memberEmail)
+                    .role(role.MEMBER)
+                    .build();
+        }
+    }
 
-    private String userName;
+    @NoArgsConstructor(access = AccessLevel.PROTECTED)
+    @Getter
+    public static class Response{
 
-    private String userEmail;
+        private Long memberId;
+        private String memberLoginId;
+        private String memberPassword;
+        private String memberName;
+        private String memberEmail;
+        private Role role;
+
+        // Entity -> DTO
+        @Builder
+        public Response(Member member){
+            this.memberId = member.getMemberId();
+            this.memberLoginId = member.getMemberLoginId();
+            this.memberPassword = member.getMemberPassword();
+            this.memberName = member.getMemberName();
+            this.memberEmail = member.getMemberEmail();
+            this.role = member.getRole();
+        }
+    }
 }
