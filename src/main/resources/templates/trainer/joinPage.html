@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/joinPage.css">
+    <title>회원가입</title>
+</head>
+<body>
+<div class="joinBox">
+    <h2 class="joinTitle">트레이너 회원가입</h2>
+    <form th:action="@{/trainerJoin_proc}" method="post">
+        <div class="loginInfo">
+            <input type="text"  name="memberLoginId" placeholder="아이디">
+            <!--            <div class="error-message" th:errors="${memberDTO.userLoginId}">-->
+            <!--                아이디 오류-->
+            <!--            </div>-->
+            <input type="password"  name="memberPassword" placeholder="비밀번호">
+            <!--            <div class="error-message" th:errors="${memberDTO.userPassword}">-->
+            <!--                비밀번호 오류-->
+            <!--            </div>-->
+        </div>
+        <div class="nameInfo">
+            <input type="text"  name="memberName" placeholder="이름">
+            <!--            <div class="error-message" th:errors="${memberDTO.userName}">-->
+            <!--                이름 오류-->
+            <!--            </div>-->
+        </div>
+        <div>
+            <input type="text" name="memberEmail" placeholder="이메일">
+            <!--            <div class="error-message" th:errors="${memberDTO.userEmail}">-->
+            <!--                이메일 오류-->
+            <!--            </div>-->
+        </div>
+        <button class="joinButton" type="submit">회원가입</button>
+    </form>
+</div>
+
+</body>
+</html>

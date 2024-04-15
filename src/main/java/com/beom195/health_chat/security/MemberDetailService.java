@@ -19,11 +19,12 @@ public class MemberDetailService implements UserDetailsService {
     private final MemberRepository memberRepository;
     // memberLoginId를 DB에 접근해 확인
     @Override
-    public UserDetails loadUserByUsername(String memberLoginId) throws UsernameNotFoundException {
-        Member member = memberRepository.findByMemberLoginId(memberLoginId).orElseThrow(() -> new UsernameNotFoundException("해당하는 사용자를 찾지 못했습니다 = " + memberLoginId));
+    public UserDetails loadUserByUsername(String loginId) throws UsernameNotFoundException {
+        Member member = memberRepository.findByMemberLoginId(loginId).orElseThrow(() -> new UsernameNotFoundException("해당하는 사용자를 찾지 못했습니다 = " + loginId));
 
         log.info("findByMemberLoginId = {}", member.getMemberLoginId());
 
         return new CustomMemberDetails(member);
     }
+
 }

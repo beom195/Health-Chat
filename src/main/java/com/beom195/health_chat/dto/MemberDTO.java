@@ -4,7 +4,6 @@ import com.beom195.health_chat.domain.Member;
 import com.beom195.health_chat.domain.Role;
 import lombok.*;
 
-@Getter
 public class MemberDTO {
 
     @AllArgsConstructor

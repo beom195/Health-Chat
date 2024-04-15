@@ -25,12 +25,11 @@ public class WebSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((authorizeRequests) -> authorizeRequests
-                        .requestMatchers("/**", "/member/joinPage", "/css/**", "/js/**").permitAll()
+                        .requestMatchers("/**", "/member/joinPage","/trainer/joinPage",  "/css/**", "/js/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin((formLogin) -> formLogin
                         .loginPage("/member/loginPage")
-                        .defaultSuccessUrl("/")
                         .failureUrl("/member/fail")
                         .usernameParameter("memberLoginId")
                         .passwordParameter("memberPassword")
