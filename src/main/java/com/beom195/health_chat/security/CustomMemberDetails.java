@@ -2,6 +2,7 @@ package com.beom195.health_chat.security;
 
 import com.beom195.health_chat.domain.Member;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -10,6 +11,7 @@ import java.util.Collection;
 
 //사용자의 정보를 담기 위해 CustomUserDetails 생성
 @RequiredArgsConstructor
+@Slf4j
 public class CustomMemberDetails implements UserDetails {
 
     private final Member member;
@@ -19,7 +21,7 @@ public class CustomMemberDetails implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
         Collection<GrantedAuthority> authorities = new ArrayList<>();
-
+        log.info("role = {}", member.getRole());
         authorities.add(() -> "ROLE_" + member.getRole());
         return authorities;
     }

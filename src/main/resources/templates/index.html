@@ -1,20 +1,36 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
 
-<a th:href="@{/auth/login}">
-    <button>로그인</button>
-</a>
-<a th:href="@{/member/join}">
-    <button>일반 회원가입</button>
-</a>
-<a th:href="@{/trainer/join}">
-    <button>트레이너 회원가입</button>
-</a>
+<th:block sec:authorize="isAnonymous()">
+    <a th:href="@{/auth/memberLogin}">
+        <button>로그인</button>
+    </a>
+    <a th:href="@{/member/join}">
+        <button>회원가입</button>
+    </a>
+</th:block>
+
+<th:block sec:authorize="isAuthenticated()">
+    <a th:href="@{/auth/logout}">
+        <button>로그아웃</button>
+    </a>
+    <a th:href="@{/member/myPage}">
+        <button>마이페이지</button>
+    </a>
+</th:block>
+
+<th:block sec:authorize="hasAuthority('ROLE_ADMIN')">
+    <a th:href="@{/admin/adminPage}">
+        <button>관리자 페이지</button>
+    </a>
+</th:block>
+
 
 </body>
 </html>
