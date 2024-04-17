@@ -30,12 +30,11 @@ public class MemberSecurityConfig{
         http
                 .authorizeHttpRequests((authorizeRequests) -> authorizeRequests
                         .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/**", "/member/joinPage", "/css/**", "/js/**").permitAll()
+                        .requestMatchers("/", "/member/join", "/css/**", "/js/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin((formLogin) -> formLogin
-                        .loginPage("/member/loginPage")
-                        .failureUrl("/member/fail")  // 로그인 실패 예외 처리 전까지 사용
+                        .loginPage("/auth/memberLogin")
                         .usernameParameter("memberLoginId")
                         .passwordParameter("memberPassword")
                         .loginProcessingUrl("/memberLogin_proc")

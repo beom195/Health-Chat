@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>myPage</h1>
+
+<div class="myPage-Box" th:object="${currentMember}">
+    <ul>
+        <li>
+            <label>사용자 이름</label>
+            <input type="text" th:value="*{memberName}" disabled/>
+        </li>
+        <li>
+            <label>사용자 아이디</label>
+            <input type="text" th:value="*{memberLoginId}" disabled/>
+        </li>
+        <li>
+            <label>사용자 이메일</label>
+            <input type="text" th:value="*{memberEmail}" disabled/>
+        </li>
+    </ul>
+</div>
+
+
+</body>
+</html>

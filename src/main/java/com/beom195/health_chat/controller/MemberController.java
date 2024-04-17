@@ -1,10 +1,13 @@
 package com.beom195.health_chat.controller;
 
+import com.beom195.health_chat.domain.Member;
 import com.beom195.health_chat.dto.MemberDTO;
+import com.beom195.health_chat.security.AuthMember;
 import com.beom195.health_chat.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -21,12 +24,6 @@ public class MemberController {
         return "member/joinPage";
     }
 
-    // 어드민 전용 페이지로 이동
-    @GetMapping("/admin/adminPage")
-    public String adminPage(){
-        return "admin/adminPage";
-    }
-
     // 멤버 로그인 폼으로 이동
     @GetMapping("/auth/memberLogin")
     public String memberlogin(){
@@ -35,7 +32,10 @@ public class MemberController {
 
     // 마이 페이지로 이동
     @GetMapping("/member/myPage")
-    public String getMyPage(){
+    public String getMyPage(@AuthMember Member member, Model model){
+
+        log.info("memberName = {}", member.getMemberName());
+        model.addAttribute("currentMember", member);
         return "member/myPage";
     }
 
