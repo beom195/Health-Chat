@@ -38,6 +38,13 @@ public class MemberController {
         model.addAttribute("currentMember", member);
         return "member/myPage";
     }
+    // 트레이너 신청
+    @PostMapping("/request_proc")
+    public String trainerRequest(@AuthMember Member member){
+        log.info("trainerRequest = {}", member.getMemberLoginId());
+        memberService.requestTrainer(member.getMemberLoginId());
+        return "redirect:member/myPage";
+    }
 
     // 멤버 회원가입(기능구현 후 ajax로 바꾸기)
     @PostMapping("/memberJoin_proc")
