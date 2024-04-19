@@ -29,6 +29,11 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    //트레이너 신청 수락시 role MEMBER -> TRAINER
+    public void roleUpdate(Role role){
+        this.role = role.TRAINER;
+    }
+
     @Builder
     public Member(Long memberId, String memberLoginId, String memberPassword, String memberName, String memberEmail, Role role) {
         this.memberId = memberId;

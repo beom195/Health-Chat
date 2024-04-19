@@ -17,6 +17,7 @@
 </th:block>
 
 <th:block sec:authorize="isAuthenticated()">
+    <span th:text="${#authentication.name}"></span><span>님 환영합니다.</span>
     <a th:href="@{/auth/logout}">
         <button>로그아웃</button>
     </a>

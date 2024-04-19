@@ -19,6 +19,6 @@ public class MemberInfo extends User {
     public MemberInfo(Member member){
         super(member.getMemberLoginId(), member.getMemberPassword(), List.of(new SimpleGrantedAuthority(member.getRole().getValue())));
         this.member = member;
-
     }
+
 }

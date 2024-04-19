@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 public class TrainerApplicationListDTO {
 
     private Long trainerListId;
+
     private Member member;
 
     @Builder

@@ -21,12 +21,14 @@ public class MemberController {
     // 멤버 회원가입 폼으로 이동
     @GetMapping("/member/join")
     public String join(){
+        log.info("회원가입 이동");
         return "member/joinPage";
     }
 
     // 멤버 로그인 폼으로 이동
     @GetMapping("/auth/memberLogin")
     public String memberlogin(){
+        log.info("로그인 이동");
         return "member/loginPage";
     }
 

@@ -3,8 +3,6 @@ package com.beom195.health_chat.config;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.Ordered;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -16,7 +14,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @RequiredArgsConstructor
 @EnableWebSecurity
 @Configuration
-@Order(Ordered.HIGHEST_PRECEDENCE)
 public class MemberSecurityConfig{
 
     //비밀번호 암호화 하기 위해 BCryptPasswordEncoder bean 등록
@@ -30,7 +27,7 @@ public class MemberSecurityConfig{
         http
                 .authorizeHttpRequests((authorizeRequests) -> authorizeRequests
                         .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/", "/member/join", "/css/**", "/js/**").permitAll()
+                        .requestMatchers("/**", "/member/join", "/css/**", "/js/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin((formLogin) -> formLogin

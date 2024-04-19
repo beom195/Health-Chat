@@ -13,9 +13,19 @@
     <th scope="col">신청자 이름</th>
     </thead>
     <tbody>
-    <tr th:object="${list}">
-        <td th:text="${list.member.memberId}">신청자 번호</td>
+    <tr th:each="list : ${lists}">
+        <td th:text="${list.trainerListId}">신청자 번호</td>
         <td th:text="${list.member.memberName}">신청자 이름</td>
+
+        <form th:action="@{/accept_proc}" method="post">
+            <input type="hidden" name="memberId" th:value="${list.member.memberId}"/>
+            <td>
+                <button type="submit">트레이너 수락</button>
+            </td>
+        </form>
+        <td>
+            <button type="submit">트레이너 거절</button>
+        </td>
     </tr>
     </tbody>
 </table>

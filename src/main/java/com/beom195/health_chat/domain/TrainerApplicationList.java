@@ -7,6 +7,7 @@ import lombok.*;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
+@Table(name = "Trainerapplicationlist")
 public class TrainerApplicationList {
 
     @Id
@@ -15,7 +16,7 @@ public class TrainerApplicationList {
     private Long trainerListId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "reg_member_id")
+    @JoinColumn(name = "member_id")
     private Member member;
 
     @Builder
