@@ -45,7 +45,7 @@ public class MemberController {
     public String trainerRequest(@AuthMember Member member){
         log.info("trainerRequest = {}", member.getMemberLoginId());
         memberService.requestTrainer(member.getMemberLoginId());
-        return "redirect:member/myPage";
+        return "redirect:/";
     }
 
     // 멤버 회원가입(기능구현 후 ajax로 바꾸기)

@@ -18,14 +18,18 @@
         <td th:text="${list.member.memberName}">신청자 이름</td>
 
         <form th:action="@{/accept_proc}" method="post">
-            <input type="hidden" name="memberId" th:value="${list.member.memberId}"/>
+            <input type="hidden" name="acceptMemberId" th:value="${list.member.memberId}"/>
             <td>
                 <button type="submit">트레이너 수락</button>
             </td>
         </form>
-        <td>
-            <button type="submit">트레이너 거절</button>
-        </td>
+
+        <form th:action="@{/reject_proc}" method="post">
+            <input type="hidden" name="rejectMemberId" th:value="${list.member.memberId}"/>
+            <td>
+                <button type="submit">트레이너 거절</button>
+            </td>
+        </form>
     </tr>
     </tbody>
 </table>

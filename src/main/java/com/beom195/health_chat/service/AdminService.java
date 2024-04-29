@@ -8,5 +8,7 @@ import java.util.List;
 public interface AdminService {
     List<TrainerApplicationListDTO> getTrainerApplicationList();
 
-    void trainerAccept(Long memberId, MemberDTO.Request memberDTO);
+    void trainerAccept(Long acceptMemberId, MemberDTO.Request memberDTO);
+
+    void trainerReject(Long rejectMemberId);
 }

@@ -38,14 +38,23 @@ public class AdminServiceImpl implements AdminService {
                 .collect(Collectors.toList());
     }
 
+    //트레이너 신청 수락
     @Transactional
     @Override
-    public void trainerAccept(Long memberId, MemberDTO.Request memberDTO) {
-        Member trainerApplicant = memberRepository.findById(memberId).orElseThrow(() -> new IllegalArgumentException("해당 신청자를 찾을 수 없습니다."));
-        log.info(trainerApplicant.getRole().toString());
+    public void trainerAccept(Long acceptMemberId, MemberDTO.Request memberDTO) {
+        Member trainerApplicant = memberRepository.findById(acceptMemberId).orElseThrow(() -> new IllegalArgumentException("해당 신청자를 찾을 수 없습니다."));
         trainerApplicant.roleUpdate(Role.TRAINER);
+        adminRepository.deleteByMemberMemberId(acceptMemberId);
         log.info(trainerApplicant.getRole().toString());
     }
 
-    // 관리자 페이지에서 트레이너 신청 받아주기
+    /*
+    트레이너 신청 거절 -> 트레이너 신청 목록 테이블에서 해당 memberId 삭제
+     */
+    @Transactional
+    @Override
+    public void trainerReject(Long rejectMemberId) {
+        adminRepository.deleteByMemberMemberId(rejectMemberId);
+        log.info("삭제 완료!");
+    }
 }

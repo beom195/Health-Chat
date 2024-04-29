@@ -27,11 +27,21 @@ public class AdminController {
         model.addAttribute("lists", trainerApplicationListDTO);
         return "admin/adminPage";
     }
-    @PostMapping("/accept_proc")
-    public String trainerAccept(Long memberId, MemberDTO.Request memberDTO){
-        log.info("memberId = {}", memberId);
-        adminService.trainerAccept(memberId, memberDTO);
 
+    //트레이너 신청 수락
+    @PostMapping("/accept_proc")
+    public String trainerAccept(Long acceptMemberId, MemberDTO.Request memberDTO){
+        log.info("memberId = {}", acceptMemberId);
+        adminService.trainerAccept(acceptMemberId, memberDTO);
+
+        return "redirect:/";
+    }
+
+    //트레이너 신청 거절
+    @PostMapping("/reject_proc")
+    public String trainerReject(Long rejectMemberId){
+        log.info("memberId = {}", rejectMemberId);
+        adminService.trainerReject(rejectMemberId);
         return "redirect:/";
     }
 }

@@ -14,4 +14,6 @@ public interface AdminRepository extends JpaRepository<TrainerApplicationList, L
      */
     @Query("SELECT trainerApplicationList FROM TrainerApplicationList trainerApplicationList JOIN FETCH trainerApplicationList.member")
     List<TrainerApplicationList> findAllWithMember();
+
+    void deleteByMemberMemberId(Long rejectMemberId);
 }
