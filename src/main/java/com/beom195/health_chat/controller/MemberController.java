@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @Slf4j
 @Controller
 @RequiredArgsConstructor
@@ -39,6 +41,13 @@ public class MemberController {
         log.info("memberName = {}", member.getMemberName());
         model.addAttribute("currentMember", member);
         return "member/myPage";
+    }
+
+    @GetMapping("/member/findTrainer")
+    public String findTrainerPage(Model model){
+        List<MemberDTO.Response> trainerList=  memberService.findTrainer();
+        model.addAttribute("trainerList", trainerList);
+        return "trainer/trainerSearch";
     }
     // 트레이너 신청
     @PostMapping("/request_proc")

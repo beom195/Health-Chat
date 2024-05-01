@@ -23,8 +23,11 @@ public class AdminController {
     @GetMapping("/admin/adminPage")
     public String adminPage(Model model){
         log.info("관리자 페이지로 이동");
+
+        //트레이너 신청 목록 같이 불러오기
         List<TrainerApplicationListDTO> trainerApplicationListDTO = adminService.getTrainerApplicationList();
         model.addAttribute("lists", trainerApplicationListDTO);
+
         return "admin/adminPage";
     }
 

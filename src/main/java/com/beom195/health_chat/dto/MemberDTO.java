@@ -45,7 +45,6 @@ public class MemberDTO {
         private String memberEmail;
         private Role role;
 
-        // Entity -> DTO
         public Response(Member member){
             this.memberId = member.getMemberId();
             this.memberLoginId = member.getMemberLoginId();
