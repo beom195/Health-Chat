@@ -1,10 +1,7 @@
 package com.beom195.health_chat.service;
 
 
-import com.beom195.health_chat.domain.Member;
-import com.beom195.health_chat.domain.Role;
-import com.beom195.health_chat.domain.Trainer;
-import com.beom195.health_chat.domain.TrainerApplicationList;
+import com.beom195.health_chat.domain.*;
 import com.beom195.health_chat.dto.MemberDTO;
 import com.beom195.health_chat.dto.TrainerApplicationListDTO;
 import com.beom195.health_chat.repository.AdminRepository;
@@ -37,6 +34,7 @@ public class AdminServiceImpl implements AdminService {
                 .map(trainerApplicationList -> TrainerApplicationListDTO.builder()
                         .trainerListId(trainerApplicationList.getTrainerListId())
                         .member(trainerApplicationList.getMember())
+                        .status(trainerApplicationList.getStatus())
                         .build())
                 .collect(Collectors.toList());
     }

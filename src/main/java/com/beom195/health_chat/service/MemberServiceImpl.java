@@ -2,6 +2,7 @@ package com.beom195.health_chat.service;
 
 import com.beom195.health_chat.domain.Member;
 import com.beom195.health_chat.domain.Role;
+import com.beom195.health_chat.domain.Status;
 import com.beom195.health_chat.domain.TrainerApplicationList;
 import com.beom195.health_chat.dto.MemberDTO;
 import com.beom195.health_chat.repository.MemberRepository;
@@ -43,7 +44,10 @@ public class MemberServiceImpl implements MemberService {
         Member member = memberRepository.findByMemberLoginId(memberLoginId).orElseThrow(() -> new UsernameNotFoundException("해당하는 사용자를 찾지 못했습니다"));
 
         log.info("requestTrainer - member: {}", member.toString());
-        TrainerApplicationList trainerApplicationList = TrainerApplicationList.builder().member(member).build();
+        TrainerApplicationList trainerApplicationList = TrainerApplicationList.builder()
+                .member(member)
+                .status(Status.PENDING)
+                .build();
         adminRepository.save(trainerApplicationList);
         log.info("trainerApplicationList = {}",  trainerApplicationList);
     }

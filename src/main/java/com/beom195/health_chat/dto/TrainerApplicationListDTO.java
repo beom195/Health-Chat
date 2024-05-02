@@ -1,6 +1,7 @@
 package com.beom195.health_chat.dto;
 
 import com.beom195.health_chat.domain.Member;
+import com.beom195.health_chat.domain.Status;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,9 +15,12 @@ public class TrainerApplicationListDTO {
 
     private Member member;
 
+    private Status status;
+
     @Builder
-    public TrainerApplicationListDTO(Long trainerListId, Member member) {
+    public TrainerApplicationListDTO(Long trainerListId, Member member, Status status) {
         this.trainerListId = trainerListId;
         this.member = member;
+        this.status = status;
     }
 }

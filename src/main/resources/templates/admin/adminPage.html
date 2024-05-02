@@ -11,11 +11,13 @@
     <thead>
     <th scope="col">신청 번호</th>
     <th scope="col">신청자 이름</th>
+    <th scope="col">신청 현황</th>
     </thead>
     <tbody>
     <tr th:each="list : ${lists}">
         <td th:text="${list.trainerListId}">신청자 번호</td>
         <td th:text="${list.member.memberName}">신청자 이름</td>
+        <td th:text="${list.status}">신청 현황</td>
 
         <form th:action="@{/accept_proc}" method="post">
             <input type="hidden" name="acceptMemberId" th:value="${list.member.memberId}"/>

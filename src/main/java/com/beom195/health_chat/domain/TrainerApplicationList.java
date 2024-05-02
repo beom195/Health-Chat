@@ -19,10 +19,14 @@ public class TrainerApplicationList {
     @JoinColumn(name = "member_id")
     private Member member;
 
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
     @Builder
-    public TrainerApplicationList(Long trainerListId, Member member) {
+    public TrainerApplicationList(Long trainerListId, Member member, Status status) {
         this.trainerListId = trainerListId;
         this.member = member;
+        this.status = status;
     }
 }
 
