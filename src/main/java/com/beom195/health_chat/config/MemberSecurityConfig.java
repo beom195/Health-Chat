@@ -27,7 +27,7 @@ public class MemberSecurityConfig{
         http
                 .authorizeHttpRequests((authorizeRequests) -> authorizeRequests
                         .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/", "/member/join", "/css/**", "/js/**").permitAll()
+                        .requestMatchers("/", "/member/join","/memberJoin_proc", "/css/**", "/js/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin((formLogin) -> formLogin

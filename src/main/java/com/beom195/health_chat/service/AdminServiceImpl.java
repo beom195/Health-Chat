@@ -3,11 +3,13 @@ package com.beom195.health_chat.service;
 
 import com.beom195.health_chat.domain.Member;
 import com.beom195.health_chat.domain.Role;
+import com.beom195.health_chat.domain.Trainer;
 import com.beom195.health_chat.domain.TrainerApplicationList;
 import com.beom195.health_chat.dto.MemberDTO;
 import com.beom195.health_chat.dto.TrainerApplicationListDTO;
 import com.beom195.health_chat.repository.AdminRepository;
 import com.beom195.health_chat.repository.MemberRepository;
+import com.beom195.health_chat.repository.TrainerRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,7 @@ public class AdminServiceImpl implements AdminService {
 
     private final MemberRepository memberRepository;
     private final AdminRepository adminRepository;
+    private final TrainerRepository trainerRepository;
 
     // 트레이너 신청자 목록 관리자 페이지로 가져오기
     @Transactional
@@ -43,9 +46,22 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void trainerAccept(Long acceptMemberId, MemberDTO.Request memberDTO) {
         Member trainerApplicant = memberRepository.findById(acceptMemberId).orElseThrow(() -> new IllegalArgumentException("해당 신청자를 찾을 수 없습니다."));
+
+        //트레이너 신청 수락 -> 트레이너 테이블에 memberName을 trainerName으로 저장
+        trainerRepository.save(Trainer.builder()
+                .trainerLoginId(trainerApplicant.getMemberLoginId())
+                .trainerName(trainerApplicant.getMemberName())
+                .trainerEmail(trainerApplicant.getMemberEmail())
+                .likes(0)
+                .build());
+
+        //트레이너 수락된 Member -> 기존 Member 테이블의 role을 MEMBER에서 TRAINER로 전환
         trainerApplicant.roleUpdate(Role.TRAINER);
+
+        //트레이너 신청자 목록에서 수락된 Membmer 삭제
         adminRepository.deleteByMemberMemberId(acceptMemberId);
-        log.info(trainerApplicant.getRole().toString());
+
+        log.info("수락된 MemberName = {}, Member Role = {}", trainerApplicant.getMemberName(), trainerApplicant.getRole().toString());
     }
 
     /*
