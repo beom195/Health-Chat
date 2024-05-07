@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -23,7 +24,9 @@
         </li>
     </ul>
     <form th:action="@{/request_proc}" method="post">
+        <th:block sec:authorize="hasAuthority('ROLE_MEMBER')">
         <button type="submit">트레이너 신청하기</button>
+        </th:block>
     </form>
 </div>
 

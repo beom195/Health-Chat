@@ -17,21 +17,22 @@
     <tr th:each="list : ${lists}">
         <td th:text="${list.trainerListId}">신청자 번호</td>
         <td th:text="${list.member.memberName}">신청자 이름</td>
-        <td th:text="${list.status}">신청 현황</td>
+        <td th:text="${list.status.value}">신청 현황</td>
 
-        <form th:action="@{/accept_proc}" method="post">
-            <input type="hidden" name="acceptMemberId" th:value="${list.member.memberId}"/>
+        <div th:if="${list.status == list.status.PENDING}">
             <td>
-                <button type="submit">트레이너 수락</button>
+                <form th:action="@{/accept_proc}" method="post">
+                    <input type="hidden" name="acceptMemberId" th:value="${list.member.memberId}"/>
+                    <button type="submit">트레이너 수락</button>
+                </form>
             </td>
-        </form>
-
-        <form th:action="@{/reject_proc}" method="post">
-            <input type="hidden" name="rejectMemberId" th:value="${list.member.memberId}"/>
             <td>
-                <button type="submit">트레이너 거절</button>
+                <form th:action="@{/reject_proc}" method="post">
+                    <input type="hidden" name="rejectMemberId" th:value="${list.member.memberId}"/>
+                    <button type="submit">트레이너 거절</button>
+                </form>
             </td>
-        </form>
+        </div>
     </tr>
     </tbody>
 </table>

@@ -44,6 +44,7 @@ public class MemberServiceImpl implements MemberService {
         Member member = memberRepository.findByMemberLoginId(memberLoginId).orElseThrow(() -> new UsernameNotFoundException("해당하는 사용자를 찾지 못했습니다"));
 
         log.info("requestTrainer - member: {}", member.toString());
+        //트레이너 신청 현황에서 대기중으로 변경
         TrainerApplicationList trainerApplicationList = TrainerApplicationList.builder()
                 .member(member)
                 .status(Status.PENDING)

@@ -22,6 +22,9 @@ public class TrainerApplicationList {
     @Enumerated(EnumType.STRING)
     private Status status;
 
+    public void statusUpdate(Status status){
+        this.status = status;
+    }
     @Builder
     public TrainerApplicationList(Long trainerListId, Member member, Status status) {
         this.trainerListId = trainerListId;
