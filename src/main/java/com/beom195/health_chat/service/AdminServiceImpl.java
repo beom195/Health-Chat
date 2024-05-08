@@ -33,7 +33,7 @@ public class AdminServiceImpl implements AdminService {
         return lists.stream().map(trainerApplicationList -> TrainerApplicationListDTO.builder().trainerListId(trainerApplicationList.getTrainerListId()).member(trainerApplicationList.getMember()).status(trainerApplicationList.getStatus()).build()).collect(Collectors.toList());
     }
 
-    //트레이너 신청 수락
+    // 트레이너 신청 수락 -> 신청 현황 "수락됨"으로 업데이트
     @Transactional
     @Override
     public void trainerAccept(Long acceptMemberId, MemberDTO.Request memberDTO) {
@@ -51,17 +51,10 @@ public class AdminServiceImpl implements AdminService {
         //트레이너 수락된 Member -> 기존 Member 테이블의 role을 MEMBER에서 TRAINER로 전환
         trainerApplicant.roleUpdate(Role.TRAINER);
 
-
-
-        //트레이너 신청자 목록에서 수락된 Membmer 삭제
-        //adminRepository.deleteByMemberMemberId(acceptMemberId);
-
         log.info("수락된 MemberName = {}, Member Role = {}", trainerApplicant.getMemberName(), trainerApplicant.getRole().toString());
     }
 
-    /*
-    트레이너 신청 거절 -> 트레이너 신청 목록 테이블에서 해당 memberId 삭제
-     */
+    // 트레이너 신청 거절 -> 신청 현황 "거절됨"으로 업데이트
     @Transactional
     @Override
     public void trainerReject(Long rejectMemberId) {

@@ -14,7 +14,7 @@
     <th scope="col">신청 현황</th>
     </thead>
     <tbody>
-    <tr th:each="list : ${lists}">
+    <tr th:each="list : *{lists}">
         <td th:text="${list.trainerListId}">신청자 번호</td>
         <td th:text="${list.member.memberName}">신청자 이름</td>
         <td th:text="${list.status.value}">신청 현황</td>

@@ -11,12 +11,10 @@ public interface AdminRepository extends JpaRepository<TrainerApplicationList, L
 
     /*
     관리자 페이지에서 신청자 목록 불러올시 member table N+1 문제
-    fetch join 방식으로 TrainerApplicationList Entity, Member Entity 한번에 조회
+    fetch join 방식으로 TrainerApplicationList Entity, Member Entity 한번에 조회(내림차순)
      */
-    @Query("SELECT trainerApplicationList FROM TrainerApplicationList trainerApplicationList JOIN FETCH trainerApplicationList.member")
+    @Query("SELECT trainerApplicationList FROM TrainerApplicationList trainerApplicationList JOIN FETCH trainerApplicationList.member ORDER BY trainerApplicationList.trainerListId DESC")
     List<TrainerApplicationList> findAllWithMember();
-
-    void deleteByMemberMemberId(Long rejectMemberId);
 
     Optional<TrainerApplicationList> findByMemberMemberId(Long acceptMemberId);
 }

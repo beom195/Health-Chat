@@ -23,11 +23,13 @@
             <input type="text" th:value="*{memberEmail}" disabled/>
         </li>
     </ul>
-    <form th:action="@{/request_proc}" method="post">
-        <th:block sec:authorize="hasAuthority('ROLE_MEMBER')">
-        <button type="submit">트레이너 신청하기</button>
-        </th:block>
-    </form>
+    <div th:if="*{role == role.MEMBER}">
+        <form th:action="@{/request_proc}" method="post">
+            <th:block sec:authorize="hasAuthority('ROLE_MEMBER')">
+                <button type="submit">트레이너 신청하기</button>
+            </th:block>
+        </form>
+    </div>
 </div>
 
 
