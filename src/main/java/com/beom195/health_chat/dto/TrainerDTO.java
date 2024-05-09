@@ -1,6 +1,5 @@
 package com.beom195.health_chat.dto;
 
-import jakarta.persistence.Column;
 import lombok.*;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
