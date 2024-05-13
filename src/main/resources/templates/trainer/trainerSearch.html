@@ -13,10 +13,14 @@
     <th scope="col">회원 등급</th>
     </thead>
     <tbody>
-    <tr th:each="list: ${trainerList}">
-    <td th:text="${list.memberId}"></td>
-    <td th:text="${list.memberName}"></td>
-    <td th:text="${list.role}"></td>
+    <tr th:each="trainer: ${trainerList}">
+    <td th:text="${trainer.trainerId}"></td>
+        <td>
+            <!-- 클릭할 수 있는 링크로 trainerName 값 전달 -->
+            <a th:href="@{/member/findTrainer/profile(trainerName=${trainer.trainerName})}"
+               th:text="${trainer.trainerName}"></a>
+        </td>
+    <td th:text="${trainer.role.value}"></td>
     </tr>
     </tbody>
 </table>

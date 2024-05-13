@@ -54,19 +54,19 @@ public class MemberServiceImpl implements MemberService {
     }
 
     // 트레이너 찾기 -> 리스트로 트레이너 목록 불러옴
-    @Transactional
-    @Override
-    public List<MemberDTO.Response> findTrainer() {
-
-        List<Member> trainerList = memberRepository.findByRole(Role.TRAINER);
-        return trainerList.stream()
-                .map(member -> MemberDTO.Response.builder()
-                        .memberId(member.getMemberId())
-                        .memberLoginId(member.getMemberLoginId())
-                        .memberName(member.getMemberName())
-                        .memberEmail(member.getMemberEmail())
-                        .role(member.getRole())
-                        .build())
-                .collect(Collectors.toList());
-    }
+//    @Transactional
+//    @Override
+//    public List<MemberDTO.Response> findTrainer() {
+//
+//        List<Member> trainerList = memberRepository.findByRole(Role.TRAINER);
+//        return trainerList.stream()
+//                .map(member -> MemberDTO.Response.builder()
+//                        .memberId(member.getMemberId())
+//                        .memberLoginId(member.getMemberLoginId())
+//                        .memberName(member.getMemberName())
+//                        .memberEmail(member.getMemberEmail())
+//                        .role(member.getRole())
+//                        .build())
+//                .collect(Collectors.toList());
+//    }
 }

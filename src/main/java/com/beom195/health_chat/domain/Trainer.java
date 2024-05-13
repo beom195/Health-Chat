@@ -22,15 +22,19 @@ public class Trainer {
     @Column(name = "trainer_email")
     private String trainerEmail;
 
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
     @Column(name = "likes")
     private Integer likes;
 
     @Builder
-    public Trainer(Long trainerId, String trainerLoginId, String trainerName, String trainerEmail, Integer likes) {
+    public Trainer(Long trainerId, String trainerLoginId, String trainerName, String trainerEmail, Role role, Integer likes) {
         this.trainerId = trainerId;
         this.trainerLoginId = trainerLoginId;
         this.trainerName = trainerName;
         this.trainerEmail = trainerEmail;
+        this.role = role;
         this.likes = likes;
     }
 }

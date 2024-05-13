@@ -43,7 +43,7 @@ public class AdminServiceImpl implements AdminService {
         TrainerApplicationList trainerApplicationList = adminRepository.findByMemberMemberId(acceptMemberId).orElseThrow(() -> new IllegalArgumentException("해당 신청자를 찾을 수 없습니다."));
 
         //트레이너 신청 수락 -> 트레이너 테이블에 member 정보를 저장
-        trainerRepository.save(Trainer.builder().trainerLoginId(trainerApplicant.getMemberLoginId()).trainerName(trainerApplicant.getMemberName()).trainerEmail(trainerApplicant.getMemberEmail()).likes(0).build());
+        trainerRepository.save(Trainer.builder().trainerLoginId(trainerApplicant.getMemberLoginId()).trainerName(trainerApplicant.getMemberName()).trainerEmail(trainerApplicant.getMemberEmail()).role(Role.TRAINER).likes(0).build());
 
         //트레이너 신청 현황 "수락됨"으로 업데이트
         trainerApplicationList.statusUpdate(Status.ACCEPTED);

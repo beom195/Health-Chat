@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>트레이너 상세 페이지</h1>
+<table >
+    <thead>
+    <th scope="col">트레이너 번호</th>
+    <th scope="col">트레이너 이름</th>
+    <th scope="col">회원 등급</th>
+    </thead>
+    <tbody>
+    <tr th:object="${trainer}">
+        <td th:text="${trainer.trainerId}"></td>
+        <td th:text="${trainer.trainerName}"></td>
+        <td th:text="${trainer.role.value}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

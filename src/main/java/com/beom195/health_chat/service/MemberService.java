@@ -11,5 +11,5 @@ public interface MemberService {
 
     void requestTrainer(String memberLoginId);
 
-    List<MemberDTO.Response> findTrainer();
+//    List<MemberDTO.Response> findTrainer();
 }
