@@ -2,8 +2,11 @@ package com.beom195.health_chat.domain;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -22,4 +25,15 @@ public class Review extends BaseTimeEntity{
     @JoinColumn(name = "trainer_id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Trainer trainer;
+
+    @Column(name = "review_content")
+    private String reviewContent;
+
+    @Builder
+    public Review(Long reviewId, Member member, Trainer trainer, String reviewContent) {
+        this.reviewId = reviewId;
+        this.member = member;
+        this.trainer = trainer;
+        this.reviewContent = reviewContent;
+    }
 }

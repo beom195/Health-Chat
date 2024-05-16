@@ -16,13 +16,15 @@ public class ReviewDTO {
     private Trainer trainer;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
+    private String reviewContent;
 
     @Builder
-    public ReviewDTO(Long reviewId, Member member, Trainer trainer, LocalDateTime createdDate, LocalDateTime modifiedDate) {
+    public ReviewDTO(Long reviewId, Member member, Trainer trainer, LocalDateTime createdDate, LocalDateTime modifiedDate, String reviewContent) {
         this.reviewId = reviewId;
         this.member = member;
         this.trainer = trainer;
         this.createdDate = createdDate;
         this.modifiedDate = modifiedDate;
+        this.reviewContent = reviewContent;
     }
 }

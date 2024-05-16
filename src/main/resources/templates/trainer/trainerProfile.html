@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>트레이너 상세 페이지</h1>
-<table >
+<table>
     <thead>
     <th scope="col">트레이너 번호</th>
     <th scope="col">트레이너 이름</th>
@@ -19,6 +19,20 @@
         <td th:text="${trainer.role.value}"></td>
     </tr>
     </tbody>
+    <!--    리뷰 조회하기 추가-->
+<!--    <h2>리뷰</h2>-->
+<!--    <ul>-->
+<!--        <li></li>-->
+<!--    </ul>-->
+    <h2>리뷰 작성</h2>
+    <form th:action="@{/trainer/submitReview}" method="post">
+        <div>
+            <input type="hidden" name="trainerLoginId" th:value="${trainer.trainerLoginId}"/>
+            <label for="reviewContent">리뷰 내용:</label>
+            <textarea id="reviewContent" name="reviewContent" rows="4" cols="50"></textarea>
+        </div>
+        <button type="submit">리뷰 작성하기</button>
+    </form>
 </table>
 </body>
 </html>

@@ -16,8 +16,7 @@
     <tr th:each="trainer: ${trainerList}">
     <td th:text="${trainer.trainerId}"></td>
         <td>
-            <!-- 클릭할 수 있는 링크로 trainerName 값 전달 -->
-            <a th:href="@{/member/findTrainer/profile(trainerName=${trainer.trainerName})}"
+            <a th:href="@{/member/findTrainer/profile(trainerLoginId=${trainer.trainerLoginId})}"
                th:text="${trainer.trainerName}"></a>
         </td>
     <td th:text="${trainer.role.value}"></td>

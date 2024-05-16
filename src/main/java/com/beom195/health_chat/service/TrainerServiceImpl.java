@@ -1,12 +1,16 @@
 package com.beom195.health_chat.service;
 
+import com.beom195.health_chat.domain.Member;
+import com.beom195.health_chat.domain.Review;
 import com.beom195.health_chat.domain.Role;
 import com.beom195.health_chat.domain.Trainer;
 import com.beom195.health_chat.dto.TrainerDTO;
+import com.beom195.health_chat.repository.ReviewRepository;
 import com.beom195.health_chat.repository.TrainerRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,8 +21,10 @@ import java.util.stream.Collectors;
 public class TrainerServiceImpl implements TrainerService{
 
     private final TrainerRepository trainerRepository;
+    private final ReviewRepository reviewRepository;
 
     //트레이너 찾기 -> 트레이너 리스트 조회
+    @Transactional
     @Override
     public List<TrainerDTO> findTrainer() {
 
@@ -36,9 +42,10 @@ public class TrainerServiceImpl implements TrainerService{
     }
 
     //트레이너 상세 페이지
+    @Transactional
     @Override
-    public TrainerDTO getTrainerProfile(String trainerName) {
-        Trainer findTrainer = trainerRepository.findByTrainerName(trainerName).orElseThrow(() -> new IllegalArgumentException("해당 트레이너를 찾을 수 없습니다."));
+    public TrainerDTO getTrainerProfile(String trainerLoginId) {
+        Trainer findTrainer = trainerRepository.findByTrainerLoginId(trainerLoginId).orElseThrow(() -> new IllegalArgumentException("해당 트레이너를 찾을 수 없습니다."));
         return TrainerDTO.builder()
                 .trainerId(findTrainer.getTrainerId())
                 .trainerLoginId(findTrainer.getTrainerLoginId())
@@ -49,5 +56,12 @@ public class TrainerServiceImpl implements TrainerService{
                 .build();
     }
 
+    //트레이너 리뷰 작성
+    @Transactional
+    @Override
+    public void submitTrainerReview(Member member, String trainerLoginId, String reviewContent) {
 
+        Trainer trainer = trainerRepository.findByTrainerLoginId(trainerLoginId).orElseThrow(() -> new IllegalArgumentException("해당 트레이너를 찾을 수 없습니다."));
+        reviewRepository.save(Review.builder().member(member).trainer(trainer).reviewContent(reviewContent).build());
+    }
 }
