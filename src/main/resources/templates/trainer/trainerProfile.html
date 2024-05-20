@@ -7,6 +7,7 @@
 <body>
 <h1>트레이너 상세 페이지</h1>
 <table>
+    <div>
     <thead>
     <th scope="col">트레이너 번호</th>
     <th scope="col">트레이너 이름</th>
@@ -19,7 +20,9 @@
         <td th:text="${trainer.role.value}"></td>
     </tr>
     </tbody>
-    <!--    리뷰 조회하기 추가-->
+</table>
+    </div>
+    <div>
     <h2>리뷰</h2>
     <ul th:each="review : ${reviewList}">
         <li th:text="${review.reviewId}">리뷰 번호</li>
@@ -31,6 +34,8 @@
         <li th:text="${review.reviewContent}">리뷰 내용</li>
         <li th:text="${review.createdDate}">작성일</li>
     </ul>
+    </div>
+    <div>
     <h2>리뷰 작성</h2>
     <form th:action="@{/trainer/submitReview}" method="post">
         <div>
@@ -40,6 +45,6 @@
         </div>
         <button type="submit">리뷰 작성하기</button>
     </form>
-</table>
+    </div>
 </body>
 </html>
