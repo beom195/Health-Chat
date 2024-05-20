@@ -32,12 +32,15 @@ public class TrainerController {
         return "trainer/trainerSearch";
     }
 
-    //트레이너 상세 페이지 + 리뷰 작성
+    //트레이너 상세 페이지 + 리뷰 조회 및 작성
     @GetMapping("/member/findTrainer/profile")
     public String getTrainerProfile(@RequestParam String trainerLoginId, Model model){
 
-        log.info("trainerName = {}", trainerLoginId);
         TrainerDTO trainer = trainerService.getTrainerProfile(trainerLoginId);
+
+        List<ReviewDTO> trainerReview = trainerService.getTrainerReview(trainerLoginId);
+        log.info("trainerReview = {}", trainerReview);
+        model.addAttribute("reviewList", trainerReview);
         model.addAttribute("trainer", trainer);
 
         return "trainer/trainerProfile";

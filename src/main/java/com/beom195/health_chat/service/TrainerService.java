@@ -12,4 +12,6 @@ public interface TrainerService {
     List<TrainerDTO> findTrainer();
 
     void submitTrainerReview(Member member, String trainerLoginId, String reviewContent);
+
+    List<ReviewDTO> getTrainerReview(String trainerLoginId);
 }

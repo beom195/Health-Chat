@@ -4,6 +4,7 @@ import com.beom195.health_chat.domain.Member;
 import com.beom195.health_chat.domain.Review;
 import com.beom195.health_chat.domain.Role;
 import com.beom195.health_chat.domain.Trainer;
+import com.beom195.health_chat.dto.ReviewDTO;
 import com.beom195.health_chat.dto.TrainerDTO;
 import com.beom195.health_chat.repository.ReviewRepository;
 import com.beom195.health_chat.repository.TrainerRepository;
@@ -63,5 +64,22 @@ public class TrainerServiceImpl implements TrainerService{
 
         Trainer trainer = trainerRepository.findByTrainerLoginId(trainerLoginId).orElseThrow(() -> new IllegalArgumentException("해당 트레이너를 찾을 수 없습니다."));
         reviewRepository.save(Review.builder().member(member).trainer(trainer).reviewContent(reviewContent).build());
+    }
+
+    //트레이너 리뷰 조회
+    @Transactional
+    @Override
+    public List<ReviewDTO> getTrainerReview(String trainerLoginId) {
+
+        List<Review> trainerReviewList = reviewRepository.findReviewByTrainerTrainerLoginId(trainerLoginId);
+        return trainerReviewList.stream().map((review -> ReviewDTO.builder()
+                .reviewId(review.getReviewId())
+                .member(review.getMember())
+                .trainer(review.getTrainer())
+                .reviewContent(review.getReviewContent())
+                .createdDate(review.getCreatedDate())
+                .modifiedDate(review.getModifiedDate())
+                .build()))
+                .collect(Collectors.toList());
     }
 }

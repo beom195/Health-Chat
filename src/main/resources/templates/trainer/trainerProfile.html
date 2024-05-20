@@ -20,10 +20,17 @@
     </tr>
     </tbody>
     <!--    리뷰 조회하기 추가-->
-<!--    <h2>리뷰</h2>-->
-<!--    <ul>-->
-<!--        <li></li>-->
-<!--    </ul>-->
+    <h2>리뷰</h2>
+    <ul th:each="review : ${reviewList}">
+        <li th:text="${review.reviewId}">리뷰 번호</li>
+        <li th:text="${review.member.memberName}">리뷰 작성자</li>
+
+<!--        트레이너 확인용-->
+        <li th:text="${review.trainer.trainerName}">리뷰 작성된 트레이너</li>
+
+        <li th:text="${review.reviewContent}">리뷰 내용</li>
+        <li th:text="${review.createdDate}">작성일</li>
+    </ul>
     <h2>리뷰 작성</h2>
     <form th:action="@{/trainer/submitReview}" method="post">
         <div>
