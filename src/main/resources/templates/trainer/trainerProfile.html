@@ -40,7 +40,6 @@
     <form th:action="@{/trainer/submitReview}" method="post">
         <div>
             <input type="hidden" name="trainerLoginId" th:value="${trainer.trainerLoginId}"/>
-            <label for="reviewContent">리뷰 내용:</label>
             <textarea id="reviewContent" name="reviewContent" rows="4" cols="50"></textarea>
         </div>
         <button type="submit">리뷰 작성하기</button>

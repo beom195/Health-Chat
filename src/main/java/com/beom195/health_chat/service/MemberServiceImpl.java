@@ -1,12 +1,11 @@
 package com.beom195.health_chat.service;
 
-import com.beom195.health_chat.domain.Member;
-import com.beom195.health_chat.domain.Role;
-import com.beom195.health_chat.domain.Status;
-import com.beom195.health_chat.domain.TrainerApplicationList;
+import com.beom195.health_chat.domain.*;
 import com.beom195.health_chat.dto.MemberDTO;
-import com.beom195.health_chat.repository.MemberRepository;
+import com.beom195.health_chat.dto.ReviewDTO;
 import com.beom195.health_chat.repository.AdminRepository;
+import com.beom195.health_chat.repository.MemberRepository;
+import com.beom195.health_chat.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -24,6 +23,7 @@ public class MemberServiceImpl implements MemberService {
 
     private final MemberRepository memberRepository;
     private final AdminRepository adminRepository;
+    private final ReviewRepository reviewRepository;
     private final PasswordEncoder passwordEncoder;
 
     //회원가입
@@ -53,20 +53,25 @@ public class MemberServiceImpl implements MemberService {
         log.info("trainerApplicationList = {}",  trainerApplicationList);
     }
 
-    // 트레이너 찾기 -> 리스트로 트레이너 목록 불러옴
-//    @Transactional
-//    @Override
-//    public List<MemberDTO.Response> findTrainer() {
-//
-//        List<Member> trainerList = memberRepository.findByRole(Role.TRAINER);
-//        return trainerList.stream()
-//                .map(member -> MemberDTO.Response.builder()
-//                        .memberId(member.getMemberId())
-//                        .memberLoginId(member.getMemberLoginId())
-//                        .memberName(member.getMemberName())
-//                        .memberEmail(member.getMemberEmail())
-//                        .role(member.getRole())
-//                        .build())
-//                .collect(Collectors.toList());
-//    }
+    //본인이 작성한 리뷰 마이페이지에서 조회
+    @Transactional
+    @Override
+    public List<ReviewDTO> viewMyReview(Long memberId) {
+
+        List<Review> reviewList = reviewRepository.findReviewByMemberMemberId(memberId);
+
+        if (reviewList.isEmpty()) {
+            throw new IllegalArgumentException("해당 리뷰를 찾지 못했습니다.");
+        }
+
+        return reviewList.stream().map((review -> ReviewDTO.builder()
+                .reviewId(review.getReviewId())
+                .member(review.getMember())
+                .trainer(review.getTrainer())
+                .reviewContent(review.getReviewContent())
+                .createdDate(review.getCreatedDate())
+                .modifiedDate(review.getModifiedDate())
+                .build()))
+                .collect(Collectors.toList());
+    }
 }

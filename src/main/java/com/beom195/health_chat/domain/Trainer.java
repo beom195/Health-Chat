@@ -60,6 +60,8 @@ public class Trainer implements Persistable<Long>{
         return this.trainerId;
     }
 
+
+    //true -> select 하지 않음
     @Override
     public boolean isNew() {
         return true;

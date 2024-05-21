@@ -38,9 +38,9 @@ public class TrainerController {
 
         TrainerDTO trainer = trainerService.getTrainerProfile(trainerLoginId);
 
-        List<ReviewDTO> trainerReview = trainerService.getTrainerReview(trainerLoginId);
-        log.info("trainerReview = {}", trainerReview);
-        model.addAttribute("reviewList", trainerReview);
+        List<ReviewDTO> reviewList = trainerService.getTrainerReview(trainerLoginId);
+        log.info("trainerReview = {}", reviewList);
+        model.addAttribute("reviewList", reviewList);
         model.addAttribute("trainer", trainer);
 
         return "trainer/trainerProfile";

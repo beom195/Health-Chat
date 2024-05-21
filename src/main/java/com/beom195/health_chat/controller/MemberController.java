@@ -2,6 +2,7 @@ package com.beom195.health_chat.controller;
 
 import com.beom195.health_chat.domain.Member;
 import com.beom195.health_chat.dto.MemberDTO;
+import com.beom195.health_chat.dto.ReviewDTO;
 import com.beom195.health_chat.security.AuthMember;
 import com.beom195.health_chat.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -50,8 +53,13 @@ public class MemberController {
     @GetMapping("/member/myPage")
     public String getMyPage(@AuthMember Member member, Model model){
 
+        //회원 정보 조회
         log.info("memberName = {}", member.getMemberName());
         model.addAttribute("currentMember", member);
+
+        //마이페이지에서 작성한 리뷰 조회
+        List<ReviewDTO> myReview = memberService.viewMyReview(member.getMemberId());
+        model.addAttribute("myReview" , myReview);
 
         return "member/myPage";
     }
@@ -65,4 +73,5 @@ public class MemberController {
 
         return "redirect:/";
     }
+
 }
