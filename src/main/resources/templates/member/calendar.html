@@ -1,19 +1,38 @@
 <!DOCTYPE html>
-<html lang='en'>
+<html lang='ko'>
 <head>
+    <title>title</title>
     <meta charset='utf-8' />
     <script src='/js/fullcalendar-6.1.12/dist/index.global.min.js'></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            let calendarEl = document.getElementById('calendar');
-            let calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth'
-            });
-            calendar.render();
-        });
-    </script>
+    <link rel="stylesheet" href="/css/modal.css">
+    <style>
+        #calendarBox{
+            width: 70%;
+            padding-left: 15%;
+        }
+    </style>
 </head>
 <body>
-<div id='calendar'></div>
+<div id="calendarBox">
+    <div id="calendar"></div>
+</div>
+
+
+<!-- 모달을 열기 위한 버튼 -->
+<button id="openModalBtn">모달 열기</button>
+
+<!-- 모달 구조 -->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close-button">×</span>
+        <h2>팝업 모달 제목</h2>
+        <p>여기에 팝업 모달 내용이 들어갑니다.</p>
+    </div>
+</div>
+<script src="/js/calendar.js"></script>
+<script src="/js/modal.js"></script>
 </body>
 </html>
+
+
+
