@@ -74,4 +74,9 @@ public class MemberController {
         return "redirect:/";
     }
 
+    @GetMapping("/member/calendar")
+    public String getCalendar(){
+        return "member/calendar";
+    }
+
 }

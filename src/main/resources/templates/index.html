@@ -28,6 +28,9 @@
     <a th:href="@{/member/myPage}">
         <button>마이페이지</button>
     </a>
+    <a th:href="@{/member/calendar}">
+        <button>내 캘린더</button>
+    </a>
 </th:block>
 
 <th:block sec:authorize="hasAuthority('ROLE_ADMIN')">
